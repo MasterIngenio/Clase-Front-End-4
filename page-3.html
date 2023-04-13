@@ -37,69 +37,69 @@
         <!-- Lo que sigue es la biblioteca de Bootstrap-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
         <!-- Lo que sigue es la biblioteca de p5.js-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"
+            integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
         <!-- Lo que sigue es el sketch resuelto con p5.js-->
         <script>
-            var img;
-            
-            var xpos, ypos; // Posición inicial de la forma
-            var xspeed = 4.8; // La velocidad de la forma
-            var yspeed = 4.2; // La velocidad de la forma
+            let boxxpos, boxypos;
 
-            var xdirection = 1; // Izquierda o derecha
-            var ydirection = 1; // De arriba a abajo
+let boxxspeed = 2.8;
+let boxyspeed = 2.2;
 
-            function setup() {
-                createCanvas(windowWidth, windowHeight).parent("sketch").style('z-index',-1);
-                olorMode(HSB, 366, 100, 100);
-                textAlign(CENTER, CENTER);
-                textSize(150);
-                noStroke();
-                frameRate(200);
-                rectMode(CENTER);
-                imageMode(CENTER);
-                boxxpos = width / 2;
-                boxypos = height / 2;
-                fill(random(0, 360), 100, 100, 50);
-                tint(random(0, 360), 100, 100, 50);
+let boxxdirection = 1;
+let boxydirection = 1;
 
-                colorMode(HSB, 360, 100, 100, 100)
-            }
+let dvd;
 
+function setup() {
+    createCanvas(windowWidth, windowHeight).parent("sketch").style("z-index", -1);
+    colorMode(HSB, 366, 100, 100);
+    textAlign(CENTER, CENTER);
+    textSize(150);
+    noStroke();
+    frameRate(200);
+    rectMode(CENTER);
+    imageMode(CENTER);
+    boxxpos = width / 2;
+    boxypos = height / 2;
+    fill(random(0, 360), 100, 100, 50);
+    tint(random(0, 360), 100, 100, 50);
 
-            img = loadImage("https://raw.githubusercontent.com/profesorfaco/front-2023-1/main/sesion_03/dvd.png");
-                colorMode(HSB, 360, 100, 100, 100);
-                tint(random(0, 360), 100, 100, 50);
-                // Establecer la posición de partida de la forma
-                xpos = width / 2;
-                ypos = height / 2;
+    colorMode(HSB, 360, 100, 100, 100);
+}
 
-            function draw(){  
-            background(255);
-                
+function draw() {
+    background("#111");
 
-                // Actualizar la posición de la forma
-                xpos = xpos + xspeed * xdirection;
-                ypos = ypos + yspeed * ydirection;
+    boxxpos = boxxpos + boxxspeed * boxxdirection;
+    boxypos = boxypos + boxyspeed * boxydirection;
 
-                // Prueba para ver si la forma excede los límites de la pantalla
-                // Si lo hace, invierta su dirección multiplicando por -1
-                if (xpos > width - 125 || xpos < 125) {
-                    xdirection *= -1;
-                    tint(random(0, 360), 100, 100, 50);
-                }
-                if (ypos > height - 125 || ypos < 125) {
-                    ydirection *= -1;
-                    tint(random(0, 360), 100, 100, 50);
-                }
+    if (boxxpos > width - 60 || boxxpos < 60) {
+        boxxdirection *= -1;
+        fill(random(0, 360), 100, 100);
+        tint(random(0, 360), 100, 100);
+    }
+    if (boxypos > height - 60 || boxypos < 60) {
+        boxydirection *= -1;
+        fill(random(0, 360), 100, 100);
+        tint(random(0, 360), 100, 100);
+    }
 
-                // Dibuja la forma
-                image(img, xpos, ypos, 250, 250);
-            }
+    rect(boxxpos, boxypos, 150, 150);
+    image(dvd, boxxpos, boxypos, 150, 150);
+}
 
-            function windowResize() {
-                resizeCanvas(windowWidth, windowHeight);
-            }
+function windowResize() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+function preload() {
+    dvd = loadImage("https://raw.githubusercontent.com/profesorfaco/front-2023-1/main/sesion_03/dvd.png");
+}
         </script>
     </body>
 </html>
